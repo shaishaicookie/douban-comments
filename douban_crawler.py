@@ -120,7 +120,7 @@ def save_comment(comment, i, cmt_type):
 
         # save quote img
             quote_img_fname = str(i) + '-quote.png'
-            with open('./images/all/' + cmt_type + '/' + quote_img_fname, 'wb') as f:
+            with open('./images/' + cmt_type + '/' + quote_img_fname, 'wb') as f:
                 f.write(requests.get(quote_img_link).content)
             quote_img['quote_img_src'] = quote_img_fname
 
