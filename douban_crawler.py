@@ -12,16 +12,16 @@ def get_comments(post_url):
     driver = webdriver.Chrome()
     driver.get(post_url)
     html = driver.page_source
-    soup = BeautifulSoup(html, features="lxml")
-    page_num = int(soup.find("span", {"class":"thispage"}).attrs["data-total-page"])
+    soup = BeautifulSoup(html, features='lxml')
+    page_num = int(soup.find('span', {'class':'thispage'}).attrs['data-total-page'])
     
     tmp = [] # list of list of comments
     for p in tqdm(range(page_num)):
         curr_page_url = post_url + '?start=' + str(p*100)
         driver.get(curr_page_url)
         html = driver.page_source
-        soup = BeautifulSoup(html, features="lxml")
-        curr_comments = soup.find_all("li", {"class":"clearfix comment-item reply-item"})
+        soup = BeautifulSoup(html, features='lxml')
+        curr_comments = soup.find_all('li', {'class':'clearfix comment-item reply-item'})
         tmp.append(curr_comments)
 
     comments = [c for sub_comments in tmp for c in sub_comments] # flatten tmp comments
@@ -32,16 +32,16 @@ def get_op_comments(post_url):
     op_post_url = post_url + '?author=1'
     driver.get(op_post_url)
     html = driver.page_source
-    soup = BeautifulSoup(html, features="lxml")
-    page_num = int(soup.find("span", {"class":"thispage"}).attrs["data-total-page"])
+    soup = BeautifulSoup(html, features='lxml')
+    page_num = int(soup.find('span', {'class':'thispage'}).attrs['data-total-page'])
     
     tmp = [] # list of list of comments
     for p in tqdm(range(page_num)):
-        curr_page_url = post_url + '?start=' + str(p*100)
+        curr_page_url = post_url + '?author=1' + '&start=' + str(p*100)
         driver.get(curr_page_url)
         html = driver.page_source
         soup = BeautifulSoup(html, features="lxml")
-        curr_comments = soup.find_all("li", {"class":"clearfix comment-item reply-item"})
+        curr_comments = soup.find_all('li', {'class':'clearfix comment-item reply-item'})
         tmp.append(curr_comments)
 
     op_comments = [c for sub_comments in tmp for c in sub_comments] # flatten tmp comments
@@ -51,8 +51,8 @@ def get_top5_comments(post_url):
     driver = webdriver.Chrome()
     driver.get(post_url)
     html = driver.page_source
-    soup = BeautifulSoup(html, features="lxml")
-    top5_comments = soup.find_all("li", {"class":"clearfix comment-item reply-item"})[:5]
+    soup = BeautifulSoup(html, features='lxml')
+    top5_comments = soup.find_all('li', {'class':'clearfix comment-item reply-item'})[:5]
     return top5_comments
 
  
