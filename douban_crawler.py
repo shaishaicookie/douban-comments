@@ -63,7 +63,7 @@ def save_comment(comment, i, cmt_type):
         type: 'all', 'op', 'top5'
     '''
     comment_data = {}
-
+    comment_data['id'] = i
     # user face
     user_face_link = comment.find('div', {'class':'user-face'}).find('img').attrs['src']
     user_face_fname = str(i) + '-user-face.png'
@@ -72,17 +72,17 @@ def save_comment(comment, i, cmt_type):
         f.write(requests.get(user_face_link).content)
     comment_data['user_face'] = user_face_fname
 
-    # cmt header 1. is_starter 2. user_id 3. time + location
+    # cmt header 1. is_op  2. user_id 3. time + location
     try:
-        is_starter = comment.find('h4').find("span", {"class":"topic-author-icon"}).text == "楼主"
+        is_op = comment.find('h4').find("span", {"class":"topic-author-icon"}).text == "楼主"
     except:
-        is_starter = False
+        is_op = False
 
     user_id = comment.find('h4').find('a').text
-    user_pubtime = comment.find('span', {"class":"pubtime"}).text
+    create_at = comment.find('span', {"class":"pubtime"}).text
     comment_data['user_id'] = user_id
-    comment_data['is_starter'] = is_starter
-    comment_data['user_pubtime'] = user_pubtime
+    comment_data['is_op'] = is_op
+    comment_data['create_at'] = create_at
 
     # quote section
     quote = {}
@@ -136,14 +136,14 @@ def save_comment(comment, i, cmt_type):
 
     # comment img section
     cmt_img = {}
-    cmt_img_tag = comment.find('div', {'class':'comment-photos'})
+    cmt_img_status = len(comment.find_all('div', {'class':'comment-photos'})) == 2
     # whether exist comment img 
-    if cmt_img_tag == None:
-        cmt_img_status = False
-        cmt_img[cmt_img_status] = cmt_img_status
+    if cmt_img_status == False:
+        cmt_img['cmt_img_status'] = cmt_img_status
     else:
         cmt_img_status = True
         cmt_img['cmt_img_status'] = cmt_img_status
+        cmt_img_tag = comment.find_all('div', {'class':'comment-photos'})[-1]
         try: 
             is_gif = cmt_img_tag.find('img').attrs['data-render-type'] =='gif'
             cmt_img_link = cmt_img_tag.find('img').attrs['data-original-url']
@@ -158,7 +158,7 @@ def save_comment(comment, i, cmt_type):
             f.write(requests.get(cmt_img_link).content)
         cmt_img['cmt_img_src'] = cmt_img_fname
         
-        cmt['cmt_img'] = cmt_img
+    cmt['cmt_img'] = cmt_img
 
     comment_data['cmt'] = cmt
 
@@ -171,26 +171,27 @@ def save_comment(comment, i, cmt_type):
 
 
 def save_comments(comments, cmt_type):
-    comments_data = {}
+    comments_data = []
     for idx in tqdm(range(len(comments))):
         comment = comments[idx]
-        comments_data[str(idx)] = save_comment(comment, idx, cmt_type)
+        comments_data.append(save_comment(comment, idx, cmt_type))
     return comments_data
 
 
 def save_data(comments_data, fname):
+    json_data = json.dumps(comments_data,  indent = 4, ensure_ascii=False)
     with open(fname, 'w') as f:
-        json.dump(comments_data, f, indent = 4, ensure_ascii=False)
+        f.write(f'export default {json_data};')
 
 
 
 post_url = 'https://www.douban.com/group/topic/279199969/'
 
 top5_comments = get_top5_comments(post_url)
-top5_data = save_data(save_comments(top5_comments, 'top5'), 'top5_data.json')
+top5_data = save_data(save_comments(top5_comments, 'top5'), 'top5_data.js')
 
 op_comments = get_op_comments(post_url)
-op_data = save_data(save_comments(op_comments, 'op'), 'op_data.json')
+op_data = save_data(save_comments(op_comments, 'op'), 'op_data.js')
 
 comments = get_comments(post_url)
-all_data = save_data(save_comments(comments, 'all'), 'all_data.json')
+all_data = save_data(save_comments(comments, 'all'), 'all_data.js')
