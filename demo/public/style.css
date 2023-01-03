@@ -1,0 +1,150 @@
+* {
+  box-sizing: border-box;
+  font-family: "Helvetica Neue", sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+.cmt-wrapper {
+  display: flex;
+  padding: 15px 0 5px 0;
+}
+
+.info {
+  width: 100%;
+  margin: 0 25px 0 12px;
+  border-bottom: 1px solid#c0c0c0;
+}
+
+.user-face {
+  width: 28px;
+  height: 28px;
+  clip-path: circle();
+  margin-left: 15px;
+}
+
+.cmt-header {
+  display: flex;
+  align-items: center;
+}
+
+.user-info {
+  display: flex;
+  margin-right: auto;
+  align-items: center;
+}
+
+.user-id {
+  font-size: 15px;
+  color: #494949;
+}
+
+.is-op {
+  font-size: 11px;
+  color: #42bd56;
+  background-color: #e8f7eb;
+  margin-left: 5px;
+  padding-top: 1px;
+  padding-bottom: 1px;
+  padding-left: 6px;
+  padding-right: 6px;
+  border-radius: 4px;
+}
+
+.header-right {
+  margin-left: auto;
+  display: flex;
+}
+.create-at {
+  font-size: 10px;
+  color: #c0c0c0;
+  margin-right: 13px;
+  text-align: right;
+}
+
+.dots-icon {
+  font-size: 13px;
+  color: #b9b9b9;
+  float: right;
+}
+
+.quote {
+  background-color: #f7f7f7;
+  border-radius: 6px;
+  padding-top: 5px;
+  padding-left: 8px;
+  padding-right: 8px;
+  padding-bottom: 8px;
+  margin-top: 5px;
+}
+
+.quote-content {
+  font-size: 15px;
+  color: #494949;
+}
+.quote-img-container {
+  position: relative;
+}
+
+.quote-img {
+  margin-top: 5px;
+  height: 188px;
+  width: 188px;
+  border-radius: 6px;
+}
+
+.quote-gif-badge {
+  position: absolute;
+  bottom: 3;
+  left: 154;
+  background-color: #000;
+  border-radius: 6px;
+  color: #fff;
+  font-size: 12px;
+  padding: 2px 6px;
+}
+
+.cmt-content {
+  font-size: 15px;
+  color: #494949;
+  margin-top: 8px;
+}
+
+.cmt-img-container {
+  position: relative;
+}
+
+.cmt-img {
+  margin-top: 8px;
+  height: 188px;
+  width: 188px;
+  border-radius: 6px;
+}
+
+.cmt-gif-badge {
+  position: absolute;
+  bottom: 3;
+  left: 154;
+  background-color: #000;
+  border-radius: 6px;
+  color: #fff;
+  font-size: 12px;
+  padding: 2px 6px;
+}
+
+.likes {
+  margin-top: 8px;
+  margin-bottom: 8px;
+  display: flex;
+  align-items: bottom;
+}
+
+.like-icon {
+  color: #b9b9b9;
+}
+
+.like-cnt {
+  margin-left: 8px;
+  color: #b9b9b9;
+  font-size: 14px;
+}
