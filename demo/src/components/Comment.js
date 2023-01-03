@@ -2,41 +2,56 @@ import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faThumbsUp } from "@fortawesome/free-regular-svg-icons";
 import { faEllipsis } from "@fortawesome/free-solid-svg-icons";
-export default function Comment() {
+export default function Comment(props) {
   return (
     <div className="cmt-wrapper">
-      <img src="./images/0-user-face.png" className="user-face"></img>
+      <img src={`../images/${props.item.user_face}`} className="user-face" />
       <div className="info">
         <div className="cmt-header">
           <div className="user-info">
-            <p className="user-id">我不是momo</p>
-            <p className="is-op">楼主</p>
+            <p className="user-id">{props.item.user_id}</p>
+            {props.item.is_op && <p className="is-op">楼主</p>}
           </div>
           <div className="header-right">
-            <p className="create-at">2022-11-26 北京</p>
+            <p className="create-at">{props.item.create_at}</p>
             <FontAwesomeIcon icon={faEllipsis} className="dots-icon" />
           </div>
         </div>
-        <div className="quote">
-          <div className="quote-content">
-            momo:
-            男女队各自大循环。。。大循环后去积分前四的队伍进第二阶段。。。第二阶段两两淘汰制。。。
+        {props.item.quote.quote_status && (
+          <div className="quote">
+            <div className="quote-content">
+              {props.item.quote.quote_user_id}: {props.item.quote.quote_content}
+            </div>
+            {props.item.quote.quote_img.quote_img_status && (
+              <div className="quote-img-container">
+                <img
+                  className="quote-img"
+                  src={`../images/${props.item.quote.quote_img.quote_img_src}`}
+                />
+                {props.item.quote.quote_img.is_gif && (
+                  <div className="quote-gif-badge">GIF</div>
+                )}
+              </div>
+            )}
           </div>
-          <div className="quote-img-container">
-            <img className="quote-img" src="./images/0-quote-img.png"></img>
-            <div className="quote-gif-badge">GIF</div>
+        )}
+        <div className="cmt-content">{props.item.cmt.cmt_content}</div>
+        {props.item.cmt.cmt_img.cmt_img_status && (
+          <div className="cmt-img-container">
+            <img
+              src={`../images/${props.item.cmt.cmt_img.cmt_img_src}`}
+              className="cmt-img"
+            ></img>
+            {props.item.cmt.cmt_img.is_gif && (
+              <div className="cmt-gif-badge">GIF</div>
+            )}
           </div>
-        </div>
-        <div className="cmt-content">那少了好多乐子</div>
-        <div className="cmt-img-container">
-          <img src="./images/22-cmt.png" className="cmt-img"></img>
-          <div className="cmt-gif-badge">GIF</div>
-        </div>
+        )}
         <div className="likes">
           <a className="like-icon">
             <FontAwesomeIcon icon={faThumbsUp} />
           </a>
-          <p className="like-cnt">9</p>
+          <p className="like-cnt">{props.item.like_cnt}</p>
         </div>
       </div>
     </div>
