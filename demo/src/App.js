@@ -11,7 +11,7 @@ export default function App() {
   return (
     <div>
       <CommentHeader />
-      <div>{comments}</div>)
+      <div>{comments}</div>
     </div>
   );
 }

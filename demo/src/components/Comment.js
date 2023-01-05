@@ -20,7 +20,12 @@ export default function Comment(props) {
         {props.item.quote.quote_status && (
           <div className="quote">
             <div className="quote-content">
-              {props.item.quote.quote_user_id}: {props.item.quote.quote_content}
+              <span style={{ fontWeight: "500", color: "#191919" }}>
+                {props.item.quote.quote_user_id}
+              </span>
+              <span style={{ color: "#818181" }}>
+                {" " + props.item.quote.quote_content}
+              </span>
             </div>
             {props.item.quote.quote_img.quote_img_status && (
               <div className="quote-img-container">
