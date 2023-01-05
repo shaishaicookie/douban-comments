@@ -5,6 +5,49 @@
   padding: 0;
 }
 
+.body-section {
+  margin-left: 20px;
+  margin-right: 20px;
+  margin-bottom: 20px;
+}
+
+.body-header {
+  display: flex;
+  padding-top: 20px;
+  align-items: center;
+}
+
+.op-photo {
+  width: 40px;
+  height: 40px;
+  clip-path: circle();
+}
+
+.op-info {
+  margin-left: 6px;
+  align-items: left;
+}
+
+.op-id {
+  font-size: 18px;
+  color: #191919;
+}
+
+.body-title {
+  font-size: 24px;
+  margin-top: 10px;
+}
+
+.body-content p {
+  margin-top: 20px;
+}
+
+.post-issue {
+  font-size: 14px;
+  color: #818181;
+  font-weight: 400;
+}
+
 .cmt-wrapper {
   display: flex;
   padding: 10px 0 5px 0;
@@ -60,7 +103,7 @@
 .create-at {
   font-size: 10px;
   color: #c0c0c0;
-  margin-right: 13px;
+  padding-right: 4px;
   text-align: right;
 }
 
@@ -68,6 +111,8 @@
   font-size: 13px;
   color: #b9b9b9;
   float: right;
+  margin-left: 10px;
+  padding-right: 4px;
 }
 
 .quote {

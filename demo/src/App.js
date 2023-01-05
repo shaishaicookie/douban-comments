@@ -1,6 +1,7 @@
 import React from "react";
 import Comment from "./components/Comment";
 import CommentHeader from "./components/CommentHeader";
+import Body from "./components/Body";
 import data from "./data";
 
 export default function App() {
@@ -10,6 +11,7 @@ export default function App() {
 
   return (
     <div>
+      <Body />
       <CommentHeader />
       <div>{comments}</div>
     </div>
