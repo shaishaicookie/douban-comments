@@ -1,16 +1,9 @@
 # doubanpostsaver
 
 ## run demo 
-
 ```
-cd demo
-```
-
-```
+npm install
 npm start
 ```
 
-## visit demo site
-```
-https://karroykswl.netlify.app/
-```
+
