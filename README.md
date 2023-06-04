@@ -5,7 +5,7 @@
 
 
 
-## web reproduction (React)
+## web reproduction 
 ```
 cd demo
 npm install
